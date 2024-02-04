@@ -2,7 +2,7 @@ import random
 import time
 
 from pages.base_page import BasePage
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
 
 
 # def test(driver):
@@ -113,3 +113,16 @@ class TestElements:
             assert double == "You have done a double click", "Not clickable Double Click"
             assert right == "You have done a right click", "Not clickable Right Click"
             assert click == "You have done a dynamic click", "Not clickable Dynamic Click"
+
+    class TestLinksPage:
+
+        def test_check_link(self,driver):
+            links_page = LinksPage(driver, "https://demoqa.com/links")
+            links_page.open()
+            href_link, current_url = links_page.check_new_tab_simple_link()
+            assert href_link == current_url, "the link is broken or url is incorrert"
+        def test_broken_link(self,driver):
+            links_page = LinksPage(driver, "https://demoqa.com/links")
+            links_page.open()
+            response_code = links_page.check_broken_link('https://demoqa.com/bad-request')
+            assert response_code == 400, "the list no broken or url is incorrect"
