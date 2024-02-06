@@ -1,3 +1,4 @@
+import os
 import random
 
 from data.data import Person
@@ -20,3 +21,14 @@ def generated_person():
         permanent_address=faker_ru.address(),
 
     )
+
+
+def generated_file(format_file):
+    path = rf'C:\Users\User\PycharmProjects\auto_qa\filetest{random.randint(0,999)}.txt'
+    file = open(path, 'w+')
+    file.write(f'Hello World{random.randint(0,999)}')
+    file.close()
+    return file.name, path
+
+
+
